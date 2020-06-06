@@ -28,9 +28,11 @@ Route::group(['prefix' => 'user' , 'middleware' => 'web'], function () {
 
 
 //dashboard
-Route::group(['middleware' => 'auth'], function () {
+Route::group([ 'prefix' => 'dashboard' , 'middleware' => 'auth'], function () {
 
-    Route::get('/dashboard', 'dashboardController@index')->name('dashboard');
+    Route::get('/main' , 'dashboardController@index')->name('dashboard');
+    Route::get('/addwallet' , 'dashboardController@addwallet')->name('addwallet');
+    Route::post('/addwallet' , 'dashboardController@doaddwallet')->name('doaddwallet');
 
 });
 

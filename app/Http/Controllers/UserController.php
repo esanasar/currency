@@ -27,7 +27,7 @@ class UserController extends Controller
 //        $this->validate($request , [],[]);
 
         if (Auth::attempt(['email' => $request->input('email') , 'password' => $request->input('password')])){
-            return redirect('/dashboard');
+            return redirect()->route('dashboard');
         }
         return redirect()->back()->with('error' , 'ایمیل یا کلمه عبور صحیح نمی باشد');
     }

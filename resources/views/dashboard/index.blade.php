@@ -5,11 +5,10 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style.css')}}" type="text/css">
     <title>Document</title>
 </head>
 <body>
-
 <nav class="navbar navbar-dark bg-dark flex-md-nowrap p-0 shadow">
     <ul class="navbar-nav px-3 " style="display: flex; list-style: none; flex-direction: row;">
         @if(!\Illuminate\Support\Facades\Auth::check())
@@ -30,10 +29,10 @@
 </nav>
 
 <div class="container mt-5">
-    @if(session('error'))
-        <div class="alert alert-danger">
+    @if(session('msg'))
+        <div class="alert alert-primary">
             <p>
-                {{session('error')}}
+                {{session('msg')}}
             </p>
         </div>
     @endif
@@ -60,12 +59,14 @@
         <div class="jumbotron col-xl-8">
             <h5 class="">موجودی کیف پول شما</h5>
             <p class="lead">{{\Illuminate\Support\Facades\Auth::user()->amount . $userCurrency->name}}</p>
-            
+
             <hr class="my-4">
-            <a class="btn btn-primary btn-lg" href="#" role="button">افزایش موجودی</a>
+            <a class="btn btn-primary btn-lg" href="{{route('addwallet')}}" role="button">افزایش موجودی</a>
             <a class="btn btn-primary btn-lg" href="#" role="button">سفارش تبدیل ارز</a>
         </div>
 </div>
+
+
 
 </body>
 </html>
