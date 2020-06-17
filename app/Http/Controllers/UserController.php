@@ -53,7 +53,7 @@ class UserController extends Controller
         $newUser = User::create($data);
         if ($newUser && $newUser instanceof User){
             Auth::login($newUser);
-            return redirect('/dashboard');
+            return redirect()->route('dashboard');
         }
         return redirect()->back()->with('error' , 'شما موفق به ثبت نام نشدید. لظفا دوباره تلاش کنید');
     }
