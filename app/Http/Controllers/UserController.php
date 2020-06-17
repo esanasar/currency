@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Models\Currency;
+use App\Models\Wallet;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -42,16 +43,24 @@ class UserController extends Controller
     public function doregister(Request $request)
     {
 //        $this->validate($request , [] , []);
-        $data = [
+        $user_data = [
             'name' => $request->input('name') ,
             'email' => $request->input('email') ,
             'password' => $request->input('password') ,
-            'amount' => $request->input('amount') ,
-            'currency' => $request->input('currency') ,
+//
         ];
+        $newUser = User::create($user_data);
 
-        $newUser = User::create($data);
-        if ($newUser && $newUser instanceof User){
+
+        $wallet_data = [
+            'user_id'  => $newUser->id ,
+            'amount' => $request->input('amount') ,
+            'currency_id' => $request->input('currency') ,
+        ];
+        $newWallet = Wallet::create($wallet_data);
+
+
+        if ($newUser && $newUser instanceof User && $newWallet && $newWallet instanceof Wallet){
             Auth::login($newUser);
             return redirect()->route('dashboard');
         }

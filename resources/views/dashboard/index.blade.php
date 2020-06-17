@@ -58,7 +58,9 @@
 
         <div class="jumbotron col-xl-8">
             <h5 class="">موجودی کیف پول شما</h5>
-            <p class="lead">{{\Illuminate\Support\Facades\Auth::user()->amount . $userCurrency->name}}</p>
+            @foreach($userWallets as $userWallet)
+            <p class="lead">{{$userWallet->amount . \App\Models\Currency::find($userWallet->currency_id)->name}}</p>
+            @endforeach
 
             <hr class="my-4">
             <a class="btn btn-primary btn-lg" href="{{route('addwallet')}}" role="button">افزایش موجودی</a>

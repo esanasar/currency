@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Currency;
+use App\Models\Wallet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -11,9 +12,12 @@ class dashboardController extends Controller
     public function index()
     {
         $currencies = Currency::all();
-        $userCurrency = Auth::user()->currency;
-        $userCurrency = Currency::find($userCurrency);
-        return view('dashboard.index')->with('currencies' , $currencies)->with('userCurrency' , $userCurrency);
+        $user_id = Auth::user();
+        $userWallets = $user_id->wallets()->get();
+
+//        $userCurrency = $user_id->wallets()->get()->currency_id;
+//        $userCurrency = Currency::find($userCurrency);
+        return view('dashboard.index')->with('currencies' , $currencies)->with('userWallets' , $userWallets);
     }
 
     public function addwallet()

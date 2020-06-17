@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\Wallet;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
@@ -27,5 +28,10 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    public function wallets()
+    {
+        return $this->hasMany(Wallet::class);
     }
 }
